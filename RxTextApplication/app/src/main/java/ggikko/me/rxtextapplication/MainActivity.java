@@ -34,6 +34,13 @@ public class MainActivity extends AppCompatActivity {
         };
 
         firstObservable.subscribe(firstObserver);
+
+        Observable<Integer> firstArrayObserverable
+                = Observable.from(new Integer[]{1, 2, 3, 4, 5, 6}); // Emits each item of the array, one at a time
+
+        firstArrayObserverable.subscribe(i->{
+                Log.d("ggikko", String.valueOf(i)); // Prints the number received
+            });
     }
 
 }
