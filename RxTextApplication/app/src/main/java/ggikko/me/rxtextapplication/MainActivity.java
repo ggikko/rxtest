@@ -41,6 +41,27 @@ public class MainActivity extends AppCompatActivity {
         firstArrayObserverable.subscribe(i->{
                 Log.d("ggikko", String.valueOf(i)); // Prints the number received
             });
+
+        Observer<Integer> secondObserver = new Observer<Integer>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Integer integer) {
+                Log.e("ggikko", integer +"");
+            }
+        };
+
+        Observable<Integer> observable = firstArrayObserverable.map(i -> i * 2).filter(i -> i!=4);;
+        observable.subscribe(secondObserver);
+
     }
 
 }
