@@ -10,8 +10,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.Observable;
 import rx.Observer;
@@ -23,7 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static String TAG = "ggikko";
 
-    @Bind(R.id.main_text) TextView main_text;
+    /** view binding */
+    @BindView(R.id.main_text) TextView main_text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
