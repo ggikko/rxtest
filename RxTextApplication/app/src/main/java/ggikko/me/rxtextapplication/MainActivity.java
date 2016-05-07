@@ -4,14 +4,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
-
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
@@ -22,8 +21,17 @@ public class MainActivity extends AppCompatActivity {
 
     public static String TAG = "ggikko";
 
+    Observable<String> firstObservable;
+
+    Observer<String> firstObserver;
+
     /** view binding */
     @BindView(R.id.main_text) TextView main_text;
+
+    @OnClick(R.id.btn_ok)
+    void callBtnOk(){
+        firstObservable.subscribe(firstObserver);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,25 +40,28 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        Observable<String> firstObservable
-                = Observable.just("Hello ggikko!-");
+        firstObservable = Observable.just("Hello ggikko!-");
 
-        Observer<String> firstObserver = new Observer<String>() {
+        firstObserver = new Observer<String>() {
             @Override
             public void onCompleted() {
+                Log.e(TAG, "first on completed");
             }
 
             @Override
             public void onError(Throwable e) {
+                Log.e(TAG, "first on error");
             }
 
             @Override
             public void onNext(String s) {
-                Log.e(TAG, s);
+                Log.e(TAG, "first on next : " + s);
+                //Recursion test
+                firstObservable.subscribeOn(Schedulers.computation()).subscribe(firstObserver);
             }
         };
 
-        firstObservable.subscribe(firstObserver);
+//        firstObservable.subscribe(firstObserver);
 
         Observable<Integer> firstArrayObserverable
                 = Observable.from(new Integer[]{1, 2, 3, 4, 5, 6}); // Emits each item of the array, one at a time
@@ -62,12 +73,12 @@ public class MainActivity extends AppCompatActivity {
         Observer<Integer> secondObserver = new Observer<Integer>() {
             @Override
             public void onCompleted() {
-
+                Log.e(TAG, "on completed");
             }
 
             @Override
             public void onError(Throwable e) {
-
+                Log.e(TAG, "on error");
             }
 
             @Override
@@ -94,11 +105,9 @@ public class MainActivity extends AppCompatActivity {
 
         getDataNaverObservable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(data -> main_text.setText(data), error ->Log.e(TAG, error.toString()+"hahaha"));
+                .subscribe(data -> main_text.setText(data), error ->Log.e(TAG,"\nerror : "+ error.toString()));
 
-//        getDataNaver.subscribe((data)->{
-//            Log.e("ggikko", data);
-//        });
+
 
     }
 
@@ -114,5 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
         return site;
     }
+
+
 
 }
