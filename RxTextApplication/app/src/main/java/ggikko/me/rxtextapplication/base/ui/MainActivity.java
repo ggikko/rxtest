@@ -18,8 +18,8 @@ public class MainActivity extends BaseActivity {
 
     private final String TAG = "ggikko";
 
-    Observer<String> ggikkoObserver;
-    Observable<String> ggikkoObservable;
+    private Observer<String> ggikkoObserver;
+    private Observable<String> ggikkoObservable;
 
     @Bind(R.id.btn_create_observerable) Button btn_create_observerable;
     @Bind(R.id.btn_subscribe_observerable) Button btn_subscribe_observerable;
