@@ -17,7 +17,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity {
+public class FetchActivity extends AppCompatActivity {
 
     public static String TAG = "ggikko";
 
@@ -26,9 +26,9 @@ public class MainActivity extends AppCompatActivity {
     Observer<String> firstObserver;
 
     /** view binding */
-    @BindView(R.id.main_text) TextView main_text;
+    @BindView(R.id.result) TextView result;
 
-    @OnClick(R.id.btn_ok)
+    @OnClick(R.id.btn_create_observerable)
     void callBtnOk(){
         firstObservable.subscribe(firstObserver);
     }
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main2);
 
         ButterKnife.bind(this);
 
@@ -105,9 +105,7 @@ public class MainActivity extends AppCompatActivity {
 
         getDataNaverObservable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(data -> main_text.setText(data), error ->Log.e(TAG,"\nerror : "+ error.toString()));
-
-
+                .subscribe(data -> result.setText(data), error ->Log.e(TAG,"\nerror : "+ error.toString()));
 
     }
 

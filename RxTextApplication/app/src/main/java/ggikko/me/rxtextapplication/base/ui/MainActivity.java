@@ -1,14 +1,16 @@
 package ggikko.me.rxtextapplication.base.ui;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ggikko.me.rxtextapplication.FetchActivity;
 import ggikko.me.rxtextapplication.R;
 import ggikko.me.rxtextapplication.base.activity.BaseActivity;
 import rx.Observable;
@@ -21,9 +23,14 @@ public class MainActivity extends BaseActivity {
     private Observer<String> ggikkoObserver;
     private Observable<String> ggikkoObservable;
 
-    @Bind(R.id.btn_create_observerable) Button btn_create_observerable;
-    @Bind(R.id.btn_subscribe_observerable) Button btn_subscribe_observerable;
-    @Bind(R.id.result) TextView result;
+    @BindView(R.id.btn_create_observerable) Button btn_create_observerable;
+    @BindView(R.id.btn_subscribe_observerable) Button btn_subscribe_observerable;
+    @BindView(R.id.result) TextView result;
+
+    @OnClick(R.id.btn_fetch)
+    void callFetchActivity(){
+        startActivity(new Intent(MainActivity.this, FetchActivity.class));
+    }
 
     boolean flag = false;
 
@@ -40,6 +47,7 @@ public class MainActivity extends BaseActivity {
 
     @OnClick(R.id.btn_subscribe_observerable)
     void callSubscribe(){
+        if(ggikkoObservable != null)
         ggikkoObservable.subscribe(ggikkoObserver);
     }
 
@@ -74,19 +82,19 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Log.e(TAG, "onResume, MainActivity");
+        Log.e(TAG, "onResume, FetchActivity");
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.e(TAG, "onPause, MainActivity");
+        Log.e(TAG, "onPause, FetchActivity");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.e(TAG, "onDestroy, MainActivity");
+        Log.e(TAG, "onDestroy, FetchActivity");
 
     }
 }
