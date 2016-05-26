@@ -1,9 +1,9 @@
 package ggikko.me.rxtextapplication.base.ui;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -16,16 +16,18 @@ import ggikko.me.rxtextapplication.base.activity.BaseActivity;
 import rx.Observable;
 import rx.Observer;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements MainViewInterface {
 
     private final String TAG = "ggikko";
 
     private Observer<String> ggikkoObserver;
     private Observable<String> ggikkoObservable;
 
+    StringBuffer total = new StringBuffer();
+
     @BindView(R.id.btn_create_observerable) Button btn_create_observerable;
     @BindView(R.id.btn_subscribe_observerable) Button btn_subscribe_observerable;
-    @BindView(R.id.result) TextView result;
+    @BindView(R.id.result) TextView resultText;
 
     @OnClick(R.id.btn_fetch)
     void callFetchActivity(){
@@ -51,12 +53,35 @@ public class MainActivity extends BaseActivity {
         ggikkoObservable.subscribe(ggikkoObserver);
     }
 
+    @OnClick({R.id.btn_make1,R.id.btn_make2,R.id.btn_make3})
+    void callMakeSubscription(View view){
+        switch (view.getId()) {
+            case R.id.btn_make1 :  {
+                mainPresenter.createTextObservable("btn 1");
+                break;
+            }
+            case R.id.btn_make2 :  {
+                mainPresenter.createTextObservable("btn 2");
+                break;
+            }
+            case R.id.btn_make3 :  {
+                mainPresenter.createTextObservable("btn 3");
+                break;
+            }
+        }
+    }
+
+    MainPresenter mainPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
+
+        mainPresenter = new MainPresenter(this);
+        mainPresenter.onCreate();
 
         ggikkoObserver = new Observer<String>() {
             @Override
@@ -72,12 +97,11 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onNext(String s) {
                 // Called each time the observable emits data
-                result.setText(s);
+                resultText.setText(s);
                 Log.d(TAG, s);
             }
         };
     }
-
 
     @Override
     protected void onResume() {
@@ -95,6 +119,23 @@ public class MainActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         Log.e(TAG, "onDestroy, FetchActivity");
+    }
+
+
+    @Override
+    public void onCompleted() {
 
     }
+
+    @Override
+    public void onError(String message) {
+
+    }
+
+    @Override
+    public void onText(String result) {
+        total.append(result);
+        resultText.setText(total.toString());
+    }
+
 }

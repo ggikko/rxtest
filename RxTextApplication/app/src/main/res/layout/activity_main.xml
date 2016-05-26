@@ -24,6 +24,24 @@
         android:layout_height="wrap_content"
         android:text="fetchFromSite"/>
 
+    <Button
+        android:id="@+id/btn_make1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="btn1"/>
+
+    <Button
+        android:id="@+id/btn_make2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="btn2"/>
+
+    <Button
+        android:id="@+id/btn_make3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="btn3"/>
+
     <TextView
         android:id="@+id/result"
         android:layout_width="wrap_content"

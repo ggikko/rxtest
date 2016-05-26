@@ -10,7 +10,7 @@ import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
 /**
- * Created by admin on 16. 5. 26..
+ * Created by ggikko on 16. 5. 26..
  */
 public abstract class BasePresenter implements Presenter {
 
@@ -21,6 +21,7 @@ public abstract class BasePresenter implements Presenter {
     @Override
     public void onCreate() {
         Log.e(TAG,"BasePresenter : Oncreate");
+        configureSubscription();
     }
 
     @Override
@@ -31,12 +32,13 @@ public abstract class BasePresenter implements Presenter {
     @Override
     public void onResume() {
         Log.e(TAG,"BasePresenter : onResume");
-        configureSubscription();
+
     }
 
     private CompositeSubscription configureSubscription() {
         if (compositeSubscription == null || compositeSubscription.isUnsubscribed()) {
             compositeSubscription = new CompositeSubscription();
+            Log.e("ggikko", "gogo");
         }
         return compositeSubscription;
     }
@@ -63,4 +65,6 @@ public abstract class BasePresenter implements Presenter {
 
         configureSubscription().add(subscription);
     }
+
+
 }
