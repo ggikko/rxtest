@@ -53,7 +53,7 @@ public class MainActivity extends BaseActivity implements MainViewInterface {
         ggikkoObservable.subscribe(ggikkoObserver);
     }
 
-    @OnClick({R.id.btn_make1,R.id.btn_make2,R.id.btn_make3})
+    @OnClick({R.id.btn_make1,R.id.btn_make2,R.id.btn_make3,R.id.btn_dagger})
     void callMakeSubscription(View view){
         switch (view.getId()) {
             case R.id.btn_make1 :  {
@@ -66,6 +66,10 @@ public class MainActivity extends BaseActivity implements MainViewInterface {
             }
             case R.id.btn_make3 :  {
                 mainPresenter.createTextObservable("btn 3");
+                break;
+            }
+            case R.id.btn_dagger :  {
+                startActivity(new Intent(MainActivity.this, DaggerActivity.class));
                 break;
             }
         }
