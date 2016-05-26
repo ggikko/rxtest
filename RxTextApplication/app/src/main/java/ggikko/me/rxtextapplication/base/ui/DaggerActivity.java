@@ -1,8 +1,6 @@
 package ggikko.me.rxtextapplication.base.ui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import javax.inject.Inject;
@@ -11,15 +9,20 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ggikko.me.rxtextapplication.R;
 import ggikko.me.rxtextapplication.RxTextApplication;
+import ggikko.me.rxtextapplication.base.activity.BaseActivity;
 import ggikko.me.rxtextapplication.base.util.ByePrinter;
+import ggikko.me.rxtextapplication.base.util.DaddyPrinter;
 import ggikko.me.rxtextapplication.base.util.GoodPrinter;
 import ggikko.me.rxtextapplication.base.util.HelloPrinter;
+import ggikko.me.rxtextapplication.base.util.MommyPrinter;
 
-public class DaggerActivity extends AppCompatActivity {
+public class DaggerActivity extends BaseActivity {
 
     @Inject HelloPrinter helloPrinter;
     @Inject ByePrinter byePrinter;
     @Inject GoodPrinter goodPrinter;
+    @Inject DaddyPrinter daddyPrinter;
+    @Inject MommyPrinter mommyPrinter;
 
     @OnClick({R.id.hello, R.id.babo, R.id.genius})
     void callOnClick(View view){
@@ -27,11 +30,13 @@ public class DaggerActivity extends AppCompatActivity {
 
             case R.id.hello :{
                 helloPrinter.hello();
+                daddyPrinter.daddy();
                 break;
             }
 
             case R.id.babo :{
                 helloPrinter.babo();
+                mommyPrinter.mommy();
                 break;
             }
 
@@ -52,5 +57,6 @@ public class DaggerActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         ((RxTextApplication)getApplication()).getTestComponent().inject(DaggerActivity.this);
+//        ((RxTextApplication)getApplication()).getTest2Component().inject(DaggerActivity.this);
     }
 }

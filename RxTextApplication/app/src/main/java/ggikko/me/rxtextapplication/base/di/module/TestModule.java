@@ -23,8 +23,7 @@ public class TestModule {
         return new ByePrinter();
     }
 
-    @Provides @Singleton
-    GoodPrinter goodPrinter(){
+    @Provides @Singleton GoodPrinter goodPrinter(){
         return new GoodPrinter();
     }
 
