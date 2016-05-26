@@ -4,6 +4,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import ggikko.me.rxtextapplication.base.util.ByePrinter;
+import ggikko.me.rxtextapplication.base.util.GoodPrinter;
 import ggikko.me.rxtextapplication.base.util.HelloPrinter;
 
 /**
@@ -13,10 +15,19 @@ import ggikko.me.rxtextapplication.base.util.HelloPrinter;
 @Module
 public class TestModule {
 
-    @Provides
-    @Singleton
-    HelloPrinter helloPrinter(){
+    @Provides @Singleton HelloPrinter helloPrinter(){
         return HelloPrinter.getInstance();
     }
+
+    @Provides @Singleton ByePrinter byePrinter(){
+        return new ByePrinter();
+    }
+
+    @Provides @Singleton
+    GoodPrinter goodPrinter(){
+        return new GoodPrinter();
+    }
+
+
 
 }

@@ -1,8 +1,9 @@
-package ggikko.me.rxtextapplication.base.di.module;
+package ggikko.me.rxtextapplication.base.di.component;
 
 import javax.inject.Singleton;
 
 import dagger.Component;
+import ggikko.me.rxtextapplication.base.di.module.TestModule;
 import ggikko.me.rxtextapplication.base.ui.DaggerActivity;
 
 /**

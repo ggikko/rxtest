@@ -10,9 +10,14 @@ import okhttp3.Request;
  */
 public class TwitterApi {
 
-    
+    private final OkHttpClient client;
+
+    public TwitterApi(OkHttpClient client) {
+        this.client = client;
+    }
+
     public void postTweet(String ggikko, String tweet) throws IOException {
-        OkHttpClient client = new OkHttpClient();
+
         Request request = new Request.Builder().build();
         client.newCall(request).execute();
     }

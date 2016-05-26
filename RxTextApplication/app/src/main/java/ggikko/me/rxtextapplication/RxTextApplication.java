@@ -2,8 +2,9 @@ package ggikko.me.rxtextapplication;
 
 import android.app.Application;
 
-import ggikko.me.rxtextapplication.base.di.module.DaggerTestComponent;
-import ggikko.me.rxtextapplication.base.di.module.TestComponent;
+
+import ggikko.me.rxtextapplication.base.di.component.DaggerTestComponent;
+import ggikko.me.rxtextapplication.base.di.component.TestComponent;
 import ggikko.me.rxtextapplication.base.di.module.TestModule;
 import lombok.Getter;
 

@@ -11,11 +11,15 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ggikko.me.rxtextapplication.R;
 import ggikko.me.rxtextapplication.RxTextApplication;
+import ggikko.me.rxtextapplication.base.util.ByePrinter;
+import ggikko.me.rxtextapplication.base.util.GoodPrinter;
 import ggikko.me.rxtextapplication.base.util.HelloPrinter;
 
 public class DaggerActivity extends AppCompatActivity {
 
     @Inject HelloPrinter helloPrinter;
+    @Inject ByePrinter byePrinter;
+    @Inject GoodPrinter goodPrinter;
 
     @OnClick({R.id.hello, R.id.babo, R.id.genius})
     void callOnClick(View view){
@@ -33,6 +37,8 @@ public class DaggerActivity extends AppCompatActivity {
 
             case R.id.genius :{
                 helloPrinter.genius();
+                byePrinter.bye();
+                goodPrinter.good();
                 break;
             }
         }
