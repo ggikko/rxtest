@@ -4,7 +4,9 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import ggikko.me.rxtextapplication.base.di.qualifier.PerActivity;
 import ggikko.me.rxtextapplication.base.util.ByePrinter;
+import ggikko.me.rxtextapplication.base.util.DaddyPrinter;
 import ggikko.me.rxtextapplication.base.util.GoodPrinter;
 import ggikko.me.rxtextapplication.base.util.HelloPrinter;
 
@@ -15,15 +17,18 @@ import ggikko.me.rxtextapplication.base.util.HelloPrinter;
 @Module
 public class TestModule {
 
-    @Provides @Singleton HelloPrinter helloPrinter(){
+    @Provides @PerActivity HelloPrinter helloPrinter(DaddyPrinter daddyPrinter){
         return HelloPrinter.getInstance();
     }
+//    @Provides @PerActivity HelloPrinter helloPrinter(DaddyPrinter daddyPrinter){
+//        return HelloPrinter.getInstance();
+//    }
 
-    @Provides @Singleton ByePrinter byePrinter(){
+    @Provides @PerActivity ByePrinter byePrinter(){
         return new ByePrinter();
     }
 
-    @Provides @Singleton GoodPrinter goodPrinter(){
+    @Provides @PerActivity GoodPrinter goodPrinter(){
         return new GoodPrinter();
     }
 

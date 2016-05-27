@@ -3,6 +3,7 @@ package ggikko.me.rxtextapplication;
 import android.app.Application;
 
 
+import ggikko.me.rxtextapplication.base.di.component.DaggerTest2Component;
 import ggikko.me.rxtextapplication.base.di.component.DaggerTestComponent;
 import ggikko.me.rxtextapplication.base.di.component.Test2Component;
 import ggikko.me.rxtextapplication.base.di.component.TestComponent;
@@ -25,8 +26,13 @@ public class RxTextApplication extends Application {
     }
 
     private void dependency() {
-        testComponent = DaggerTestComponent.builder().testModule(new TestModule()).build();
-//        test2Component = DaggerTest2Component.builder().test2Module(new Test2Module()).build();
+//        testComponent = DaggerTestComponent.builder().test2Component(test2Component).testModule(new TestModule()).build();
+//        testComponent = DaggerTestComponent.builder().testModule(new TestModule()).build();
+        testComponent = DaggerTestComponent.builder().test2Component(getTest22Component()).build();
+    }
+
+    public Test2Component getTest22Component(){
+        return  DaggerTest2Component.builder().build();
     }
 
 }

@@ -7,18 +7,32 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ggikko.me.rxtextapplication.FetchActivity;
 import ggikko.me.rxtextapplication.R;
+import ggikko.me.rxtextapplication.RxTextApplication;
 import ggikko.me.rxtextapplication.base.activity.BaseActivity;
+import ggikko.me.rxtextapplication.base.util.ByePrinter;
+import ggikko.me.rxtextapplication.base.util.DaddyPrinter;
+import ggikko.me.rxtextapplication.base.util.GoodPrinter;
+import ggikko.me.rxtextapplication.base.util.HelloPrinter;
+import ggikko.me.rxtextapplication.base.util.MommyPrinter;
 import rx.Observable;
 import rx.Observer;
 
 public class MainActivity extends BaseActivity implements MainViewInterface {
 
     private final String TAG = "ggikko";
+
+    @Inject HelloPrinter helloPrinter;
+    @Inject ByePrinter byePrinter;
+    @Inject GoodPrinter goodPrinter;
+//    @Inject DaddyPrinter daddyPrinter;
+//    @Inject MommyPrinter mommyPrinter;
 
     private Observer<String> ggikkoObserver;
     private Observable<String> ggikkoObservable;
@@ -28,6 +42,7 @@ public class MainActivity extends BaseActivity implements MainViewInterface {
     @BindView(R.id.btn_create_observerable) Button btn_create_observerable;
     @BindView(R.id.btn_subscribe_observerable) Button btn_subscribe_observerable;
     @BindView(R.id.result) TextView resultText;
+    @BindView(R.id.btn_inject) Button btn_inject;
 
     @OnClick(R.id.btn_fetch)
     void callFetchActivity(){
@@ -53,7 +68,7 @@ public class MainActivity extends BaseActivity implements MainViewInterface {
         ggikkoObservable.subscribe(ggikkoObserver);
     }
 
-    @OnClick({R.id.btn_make1,R.id.btn_make2,R.id.btn_make3,R.id.btn_dagger})
+    @OnClick({R.id.btn_make1,R.id.btn_make2,R.id.btn_make3,R.id.btn_dagger, R.id.btn_inject})
     void callMakeSubscription(View view){
         switch (view.getId()) {
             case R.id.btn_make1 :  {
@@ -72,6 +87,10 @@ public class MainActivity extends BaseActivity implements MainViewInterface {
                 startActivity(new Intent(MainActivity.this, DaggerActivity.class));
                 break;
             }
+            case R.id.btn_inject :  {
+//                resultText.setText(daddyPrinter.daddy());
+                break;
+            }
         }
     }
 
@@ -83,6 +102,8 @@ public class MainActivity extends BaseActivity implements MainViewInterface {
         setContentView(R.layout.activity_main);
 
         ButterKnife.bind(this);
+
+//        ((RxTextApplication)getApplication()).getTestComponent().injectMainActivity(MainActivity.this);
 
         mainPresenter = new MainPresenter(this);
         mainPresenter.onCreate();

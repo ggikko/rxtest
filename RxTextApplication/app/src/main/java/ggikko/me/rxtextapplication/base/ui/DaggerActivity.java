@@ -22,7 +22,7 @@ public class DaggerActivity extends BaseActivity {
     @Inject ByePrinter byePrinter;
     @Inject GoodPrinter goodPrinter;
     @Inject DaddyPrinter daddyPrinter;
-    @Inject MommyPrinter mommyPrinter;
+//    @Inject MommyPrinter mommyPrinter;
 
     @OnClick({R.id.hello, R.id.babo, R.id.genius})
     void callOnClick(View view){
@@ -36,7 +36,7 @@ public class DaggerActivity extends BaseActivity {
 
             case R.id.babo :{
                 helloPrinter.babo();
-                mommyPrinter.mommy();
+//                mommyPrinter.mommy();
                 break;
             }
 
@@ -56,7 +56,8 @@ public class DaggerActivity extends BaseActivity {
 
         ButterKnife.bind(this);
 
-        ((RxTextApplication)getApplication()).getTestComponent().inject(DaggerActivity.this);
+        ((RxTextApplication)getApplication()).getTestComponent().injectActivity(DaggerActivity.this);
+//        ((RxTextApplication)getApplication()).getTestComponent().inject(DaggerActivity.this);
 //        ((RxTextApplication)getApplication()).getTest2Component().inject(DaggerActivity.this);
     }
 }

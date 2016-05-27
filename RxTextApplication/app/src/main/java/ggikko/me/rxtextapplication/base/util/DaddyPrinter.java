@@ -7,7 +7,8 @@ import android.util.Log;
  */
 public class DaddyPrinter {
 
-    public void daddy(){
+    public String daddy(){
         Log.e("ggikko", "daddy");
+        return "daddy";
     }
 }

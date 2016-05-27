@@ -6,15 +6,20 @@ import dagger.Component;
 import ggikko.me.rxtextapplication.base.activity.BaseActivity;
 import ggikko.me.rxtextapplication.base.di.module.Test2Module;
 import ggikko.me.rxtextapplication.base.di.module.TestModule;
+import ggikko.me.rxtextapplication.base.di.qualifier.PerActivity;
 import ggikko.me.rxtextapplication.base.ui.DaggerActivity;
+import ggikko.me.rxtextapplication.base.ui.MainActivity;
 
 /**
- * Created by admin on 16. 5. 26..
+ * Created by ggikko on 16. 5. 26..
  */
-@Singleton
-@Component(modules = {TestModule.class,Test2Module.class})
+
+
+@PerActivity
+@Component(modules = TestModule.class, dependencies = Test2Component.class)
 public interface TestComponent {
 
-    void inject(DaggerActivity daggerActivity);
+    void injectActivity(DaggerActivity daggerActivity);
+//    void injectMainActivity(MainActivity mainActivity);
 
 }
